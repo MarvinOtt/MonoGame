@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 
 namespace Microsoft.Xna.Framework.Graphics
 {
-    public partial class BufferResource
+    public partial class BufferResource : ShaderResource
     {
         private SharpDX.Direct3D11.Buffer _buffer;
         private SharpDX.Direct3D11.Buffer _cachedStagingBuffer;
@@ -95,6 +95,9 @@ namespace Microsoft.Xna.Framework.Graphics
         private void PlatformGraphicsDeviceResetting()
         {
             SharpDX.Utilities.Dispose(ref _buffer);
+            SharpDX.Utilities.Dispose(ref _resourceView);
+            SharpDX.Utilities.Dispose(ref _unorderedAccessView);
+            SharpDX.Utilities.Dispose(ref _cachedStagingBuffer);
         }
 
         void GenerateIfRequired()
@@ -296,6 +299,8 @@ namespace Microsoft.Xna.Framework.Graphics
             if (disposing)
             {
                 SharpDX.Utilities.Dispose(ref _buffer);
+                SharpDX.Utilities.Dispose(ref _resourceView);
+                SharpDX.Utilities.Dispose(ref _unorderedAccessView);
                 SharpDX.Utilities.Dispose(ref _cachedStagingBuffer);
             }
 
